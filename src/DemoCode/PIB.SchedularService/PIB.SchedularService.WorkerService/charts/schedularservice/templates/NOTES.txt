@@ -1,0 +1,5 @@
+For testing purposes, you can now create a proxy on your local machine to access the service.
+Run these commands and then navigate to `http://127.0.0.1:8080/health` to view the health status endpoint
+
+export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "schedularservice.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:80
